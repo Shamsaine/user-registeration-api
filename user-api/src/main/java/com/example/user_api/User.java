@@ -47,6 +47,5 @@ public class User {
 
     public void getGender(){return gender;}
 
-    public void getPhoneNumber(return phoneNumber;)
-
+    public void getPhoneNumber(){return phoneNumber;}
 }
