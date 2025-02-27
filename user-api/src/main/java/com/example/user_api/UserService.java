@@ -15,8 +15,7 @@ public class UserService {
         validateInput(firstName, lastName, email, phoneNumber);
 
         User user = new User(firstName, lastName, email, gender, phoneNumber);
-        user.setUserId(userIdCounter++);
-        userDatabase.put(user.getUserId(), user);
+        userDatabase.put(userIdCounter++, user);
         return user;
     }
 

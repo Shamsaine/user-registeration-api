@@ -1,7 +1,5 @@
-package com.example.user_api.controller;
+package com.example.user_api;
 
-import com.example.user_api.model.User;
-import com.example.user_api.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,26 +12,26 @@ public class UserController {
 
     private final UserService userService;
 
-    // **Constructor Injection for Dependency Injection**
+    // Constructor Injection for Dependency Injection
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // **CREATE: Add a new user**
+    // CREATE: Add a new user
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+        User createdUser = userService.createUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getGender(), user.getPhoneNumber());
         return ResponseEntity.ok(createdUser);
     }
 
-    // **READ: Get all users**
+    // READ: Get all users
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    // **READ: Get a single user by ID**
+    // READ: Get a single user by ID
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable int userId) {
         Optional<User> user = userService.getUserById(userId);
@@ -41,18 +39,18 @@ public class UserController {
                    .orElseGet(() -> ResponseEntity.status(404).body("User not found"));
     }
 
-    // **UPDATE: Modify an existing user**
+    // UPDATE: Modify an existing user
     @PutMapping("/update/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable int userId, @RequestBody User updatedUser) {
         try {
-            User user = userService.updateUser(userId, updatedUser);
+            User user = userService.updateUser(userId, updatedUser.getFirstName(), updatedUser.getLastName(), updatedUser.getEmail(), updatedUser.getGender(), updatedUser.getPhoneNumber());
             return ResponseEntity.ok(user);
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 
-    // **DELETE: Remove a user**
+    // DELETE: Remove a user
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable int userId) {
         try {
