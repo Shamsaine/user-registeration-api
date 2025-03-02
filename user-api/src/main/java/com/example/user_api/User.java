@@ -1,22 +1,29 @@
 package com.example.user_api;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name="users")
 public class User {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
     @Column(nullable = false, length = 255)
     private String firstName;
 
-    @Column (nullable = false, length = 255)
+    @Column(nullable = false, length = 255)
     private String lastName;
 
-    @Column (nullable = false, unique = true, length = 255)
+    @Column(nullable = false, unique = true, length = 255)
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -26,9 +33,9 @@ public class User {
     @Column(nullable = true, length = 255)
     private String phoneNumber;
 
-    public User(){}
+    public User() {}
 
-    public User(String firstName, String lastName, String email, Gender gender, String phoneNumber){
+    public User(String firstName, String lastName, String email, Gender gender, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
