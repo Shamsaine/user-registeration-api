@@ -57,6 +57,8 @@ public class User {
     public String getPhoneNumber() { return phoneNumber; }
 
     // Setters
+    public void setUserId(int userId) { this.userId = userId; }
+
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public void setLastName(String lastName) { this.lastName = lastName; }
